@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+@Library('sgsdk-live-personal')
 
 pipeline {
     agent any
