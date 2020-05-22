@@ -1,0 +1,6 @@
+#
+# Common vars among jobs in the same environment
+#
+
+region: global
+datacenter: dc1
