@@ -1,5 +1,5 @@
 nomad:
-  addr: 141.164.41.49:4646
+  addr: '141.164.41.49'
   token: sgsdk-dev.nomad
   vars: dev
   branch: master

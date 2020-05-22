@@ -13,10 +13,6 @@ def getNomadVersion() {
     return '0.11.1'
 }
 
-def getJobsRepo() {
-    return 'https://github.com/Void9711/sgsdk-live-personal.git'
-}
-
 def call(Map m = [:]) {
     def envName = m.get('env')
     def jobName = m.get('job')
@@ -37,15 +33,10 @@ def call(Map m = [:]) {
     def nomadAddr = targetEnv.nomad.addr
     def nomadToken = targetEnv.nomad.token
     def nomadVars = targetEnv.nomad.vars
-    def nomadBranch = targetEnv.nomad.branch
 
     assert nomadAddr
     assert nomadToken
     assert nomadVars
-    assert nomadBranch
-
-    def repo = getJobsRepo()
-    git url: repo, branch: nomadBranch
 
     echo "Deploying job <${jobName}> to env <${envName}>"
 
