@@ -14,11 +14,23 @@ pipeline {
         ansiColor('xterm')
     }
     parameters {
+        booleanParam(name: 'CLEAN_WS',
+            defaultValue: false,
+            description: 'When checked, call function cleanWs to clean workspace.')
         choice(name: 'TARGET_ENV',
             choices: getEnvChoices(),
             description: 'The environment to deploy to.')
     }
     stages {
+        stage('Clean') {
+            steps {
+                script {
+                    if (params.CLEAN_WS) {
+                        cleanWs()
+                    }
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 levantDeploy job: 'example', env: params.TARGET_ENV, repo: NOMAD_REPO, resource: 'sgsdk-live', subdirectory: './nomad', useNomadRun: true

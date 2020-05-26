@@ -26,6 +26,8 @@ def call(Map m = [:]) {
     assert envName
     assert jobName
 
+    git url: projectRepo, branch: nomadBranch
+
     def targetEnv = loadEnv(resourcePath, envName)
     def levantVersion = targetEnv['levant.version']
     def nomadVersion = targetEnv['nomad.version']
@@ -39,8 +41,6 @@ def call(Map m = [:]) {
     assert nomadToken
     assert nomadVars
     assert nomadBranch
-
-    git url: projectRepo, branch: nomadBranch
 
     echo "Deploying job <${jobName}> to env <${envName}>"
 
