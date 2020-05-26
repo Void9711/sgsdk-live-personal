@@ -22,6 +22,7 @@ def call(Map m = [:]) {
     def useNomadJobVars = m.get('useNomadJobVars', true)
 
     assert projectRepo
+    assert resourcePath
     assert envName
     assert jobName
 
