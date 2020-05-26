@@ -7,7 +7,7 @@
 import groovy.json.JsonOutput
 
 def loadProperties(String resourcePath, String name, defaults = null) {
-    def resource = readProperties file: "${resourcePath}/${name}.properties", defaults: defaults
+    def resource = readProperties file: "resources/${resourcePath}/${name}.properties", defaults: defaults
     return resource
 }
 
