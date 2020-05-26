@@ -6,9 +6,9 @@
 
 import groovy.json.JsonOutput
 
-def loadYaml(String name, defaults = null) {
-    def resource = libraryResource "sgsdk-live/${name}.yml"
-    return readYaml(text: resource, defaults: defaults)
+def loadProperties(String resourcePath, String name, defaults = null) {
+    def resource = readProperties file: "${resourcePath}/${name}.properties", defaults: defaults
+    return resource
 }
 
 def printMap(String name, map) {
@@ -17,8 +17,8 @@ def printMap(String name, map) {
     echo "[loadEnv] ${name}\n${json}"
 }
 
-def call(String name, boolean debug = false) {
-    def map = loadYaml(name)
+def call(String resourcePath, String name, boolean debug = false) {
+    def map = loadProperties(resourcePath, name)
     if (debug) {
         printMap(name, map)
     }

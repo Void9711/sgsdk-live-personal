@@ -1,5 +1,8 @@
 nomad:
+  version: '0.11.1'
   addr: 'http://141.164.41.49:4646'
   token: sgsdk-dev.nomad
   vars: dev
   branch: master
+levant:
+  version: '0.2.9'
