@@ -31,7 +31,7 @@ def call(Map m = [:]) {
     def nomadToken = targetEnv['nomad.token']
     def nomadVars = targetEnv['nomad.vars']
     def nomadBranch = targetEnv['nomad.branch']
-    def subdirectory = targetEnv['nomad.subdirectory']
+    def subdirectory = targetEnv['nomad.subdirectory'] ?: '.'
 
     assert levantVersion
     assert nomadVersion
@@ -40,10 +40,6 @@ def call(Map m = [:]) {
     assert nomadToken
     assert nomadVars
     assert nomadBranch
-
-    if (!subdirectory) {
-        subdirectory = '.'
-    }
 
     git url: nomadRepo, branch: nomadBranch
 
