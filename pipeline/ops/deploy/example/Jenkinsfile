@@ -1,8 +1,6 @@
 #!/usr/bin/env groovy
 @Library('sgsdk-live-personal') _
 
-NOMAD_REPO='https://github.com/Void9711/sgsdk-live-personal.git'
-
 pipeline {
     agent any
     options {
@@ -33,7 +31,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                levantDeploy job: 'example', env: params.TARGET_ENV, repo: NOMAD_REPO, resource: 'sgsdk-live', subdirectory: './nomad', useNomadRun: true
+                levantDeploy job: 'example', env: params.TARGET_ENV, resources: 'sgsdk-live', useNomadRun: true
             }
         }
     }

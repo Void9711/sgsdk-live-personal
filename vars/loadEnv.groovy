@@ -7,8 +7,8 @@
 import groovy.json.JsonOutput
 
 def loadProperties(String resourcePath, String name, defaults = null) {
-    def resource = readProperties file: "resources/${resourcePath}/${name}.properties", defaults: defaults
-    return resource
+    def resource = libraryResource "${resourcePath}/${name}.properties"
+    return readProperties(text: resource, defaults: defaults)
 }
 
 def printMap(String name, map) {

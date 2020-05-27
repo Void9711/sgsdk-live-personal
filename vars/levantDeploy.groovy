@@ -6,11 +6,9 @@
 //
 
 def call(Map m = [:]) {
-    def projectRepo = m.get('repo')
-    def resourcePath = m.get('resource')
-    def subdirectory = m.get('subdirectory', '.')
     def envName = m.get('env')
     def jobName = m.get('job')
+    def resourcesPath = m.get('resources')
     def vars = m.get('vars', [:])
 
     // When true, will render a Nomad job from a template then pass to "nomad run" via pipe.
@@ -21,26 +19,33 @@ def call(Map m = [:]) {
     def useNomadRun = m.get('useNomadRun', false)
     def useNomadJobVars = m.get('useNomadJobVars', true)
 
-    assert projectRepo
-    assert resourcePath
     assert envName
     assert jobName
+    assert resourcesPath
 
-    git url: projectRepo, branch: nomadBranch
-
-    def targetEnv = loadEnv(resourcePath, envName)
+    def targetEnv = loadEnv(resourcesPath, envName)
     def levantVersion = targetEnv['levant.version']
     def nomadVersion = targetEnv['nomad.version']
     def nomadAddr = targetEnv['nomad.addr']
+    def nomadRepo = targetEnv['nomad.repo']
     def nomadToken = targetEnv['nomad.token']
     def nomadVars = targetEnv['nomad.vars']
     def nomadBranch = targetEnv['nomad.branch']
+    def subdirectory = targetEnv['nomad.subdirectory']
+
     assert levantVersion
     assert nomadVersion
     assert nomadAddr
+    assert nomadRepo
     assert nomadToken
     assert nomadVars
     assert nomadBranch
+
+    if (!subdirectory) {
+        subdirectory = '.'
+    }
+
+    git url: nomadRepo, branch: nomadBranch
 
     echo "Deploying job <${jobName}> to env <${envName}>"
 
