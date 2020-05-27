@@ -14,11 +14,7 @@ job "nginx-internalapi" {
 
       config {
         image = "nginx:[[.version]]"
-        args  = [
-          "nginx",
-          "-c", "/local/nginx-internalapi.conf",
-          "-g", "daemon off;",
-        ]
+        args  = ["/local/nginx-internalapi.conf"]
         network_mode = "host"
       }
 

@@ -1,0 +1,37 @@
+#!/usr/bin/env groovy
+@Library('sgsdk-live-personal') _
+
+def getNginxChoices() {
+    return [
+        'nginx',
+        'nginx-internalapi',
+        'nginx-safeapi',
+    ].join('\n')
+}
+
+pipeline {
+    agent any
+    options {
+        skipDefaultCheckout()
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(
+            daysToKeepStr: '15'
+        ))
+        ansiColor('xterm')
+    }
+    parameters {
+        choice(name: 'JOB',
+            choices: getNginxChoices(),
+            description: 'The job to deploy.')
+        choice(name: 'TARGET_ENV',
+            choices: getEnvChoices(),
+            description: 'The environment to deploy to.')
+    }
+    stages {
+        stage('Deploy') {
+            steps {
+                levantDeploy job: params.JOB, env: params.TARGET_ENV, resources: 'sgsdk-live', useNomadRun: true
+            }
+        }
+    }
+}
