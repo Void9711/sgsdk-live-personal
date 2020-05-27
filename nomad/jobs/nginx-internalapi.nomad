@@ -16,7 +16,7 @@ job "nginx-internalapi" {
         image = "nginx:[[.version]]"
         args  = [
           "nginx",
-          "-c", "/local/nginx-internalapi.conf",
+          "-c", "local/nginx-internalapi.conf",
           "-g", "daemon off;",
         ]
         network_mode = "host"
@@ -69,7 +69,7 @@ server {
     }
 }
 EOF
-        destination   = "/local/nginx-internalapi.conf"
+        destination   = "local/nginx-internalapi.conf"
         change_mode   = "signal"
         change_signal = "SIGHUP"
       }
