@@ -6,9 +6,9 @@
 
 import groovy.json.JsonOutput
 
-def loadProperties(String resourcePath, String name, defaults = null) {
+def loadYaml(String resourcePath, String name, defaults = null) {
     def resource = libraryResource "${resourcePath}/${name}.yml"
-    return readProperties(text: resource, defaults: defaults)
+    return readYaml(text: resource, defaults: defaults)
 }
 
 def printMap(String name, map) {
@@ -18,7 +18,7 @@ def printMap(String name, map) {
 }
 
 def call(String resourcePath, String name, boolean debug = false) {
-    def map = loadProperties(resourcePath, name)
+    def map = loadYaml(resourcePath, name)
     if (debug) {
         printMap(name, map)
     }
