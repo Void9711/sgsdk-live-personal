@@ -1,10 +1,11 @@
 nomad:
-  version: '0.11.1'
-  addr: 'http://141.164.41.49:4646'
-  token: 'sgsdk-dev.nomad'
-  vars: 'dev'
-  branch: 'master'
-  subdirectory: './nomad'
+  version: 0.11.1
+  addr: http://141.164.41.49:4646
+  repo: https://github.com/Void9711/sgsdk-live-personal.git
+  token: sgsdk-dev.nomad
+  vars: dev
+  branch: master
+  subdirectory: ./nomad
 
 levant:
-  version: '0.2.9'
+  version: 0.2.9
