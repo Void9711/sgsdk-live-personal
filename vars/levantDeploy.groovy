@@ -24,14 +24,14 @@ def call(Map m = [:]) {
     assert resourcesPath
 
     def targetEnv = loadEnv(resourcesPath, envName)
-    def levantVersion = targetEnv['levant.version']
-    def nomadVersion = targetEnv['nomad.version']
-    def nomadAddr = targetEnv['nomad.addr']
-    def nomadRepo = targetEnv['nomad.repo']
-    def nomadToken = targetEnv['nomad.token']
-    def nomadVars = targetEnv['nomad.vars']
-    def nomadBranch = targetEnv['nomad.branch']
-    def subdirectory = targetEnv['nomad.subdirectory'] ?: '.'
+    def levantVersion = targetEnv.levant.version
+    def nomadVersion = targetEnv.nomad.version
+    def nomadAddr = targetEnv.nomad.addr
+    def nomadRepo = targetEnv.nomad.repo
+    def nomadToken = targetEnv.nomad.token
+    def nomadVars = targetEnv.nomad.vars
+    def nomadBranch = targetEnv.nomad.branch
+    def subdirectory = targetEnv.nomad.subdirectory ?: '.'
 
     assert levantVersion
     assert nomadVersion
